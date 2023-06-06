@@ -1,18 +1,12 @@
-#include <stdlib.h>
+
 #include "lists.h"
-typedef struct node
-{
-	int data;
-	struct node* next;
-}
-listint_t;
 
 listint_t* insert_node(listint_t** head, int number)
 {
 	listint_t* new_node = (listint_t*)malloc(sizeof(listint_t));
 	if (new_node == NULL)
 	{
-		return NULL;
+		return (NULL);
 	}
 	new_node->data = number;
 	new_node->next = NULL;
@@ -21,7 +15,7 @@ listint_t* insert_node(listint_t** head, int number)
 	{
 		new_node->next = *head;
 		*head = new_node;
-		return new_node;
+		return (new_node);
 	}
 
 	listint_t* current = *head;
@@ -34,5 +28,5 @@ listint_t* insert_node(listint_t** head, int number)
 	new_node->next = current->next;
 	current->next = new_node;
 
-	return new_node;
+	return (new_node);
 }
