@@ -1,0 +1,27 @@
+The ``0-add_integer`` module
+==========================
+
+Using ``add_integer``
+
+This is an example text file in reStructuredText format.  First import
+``add_integer`` from the ``0-add_integer`` module:
+
+	>>> add_integer = __import__('0-add_integer').add_integer
+
+Now use it:
+	this add positive
+	>>> add_integer(2, 4)
+	6
+	
+	this add positive and negative integer
+	>>> add_integer(10, -2)
+	8
+	
+	this add two negative integer
+	>>> add_integer(-6, -2)
+	-8
+	
+	this add integer to the one provided
+	>>> add_integer(5)
+	103
+
