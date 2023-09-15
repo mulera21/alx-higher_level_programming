@@ -1,32 +1,34 @@
-#!/usr/bin/env python3
-"""Lists all states from the database hbtn_0e_0_usa"""
-
+#!/usr/bin/python3
 import MySQLdb
 import sys
 
 if __name__ == "__main__":
-    # Connect to MySQL server
-    db = MySQLdb.connect(
-        host="localhost",
-        port=3306,
-        user=sys.argv[1],
-        passwd=sys.argv[2],
-        db=sys.argv[3]
-    )
+    if len(sys.argv) != 4:
+        print("Usage: {} <mysql_username> <mysql_password> <database_name>".format(sys.argv[0]))
+        sys.exit(1)
 
-    # Create cursor object
-    cursor = db.cursor()
+    mysql_username = sys.argv[1]
+    mysql_password = sys.argv[2]
+    database_name = sys.argv[3]
 
-    # Execute SQL query
-    cursor.execute("SELECT * FROM states ORDER BY id ASC")
+    try:
+        # Connect to the MySQL server
+        db = MySQLdb.connect(host="localhost", port=3306, user=mysql_username, passwd=mysql_password, db=database_name)
 
-    # Fetch all rows
-    rows = cursor.fetchall()
+        # Create a cursor object to interact with the database
+        cursor = db.cursor()
 
-    # Print results
-    for row in rows:
-        print(row)
+        # Execute the SQL query to select all states and order by ID
+        cursor.execute("SELECT * FROM states ORDER BY id")
 
-    # Close cursor and database connection
-    cursor.close()
-    db.close()
+        # Fetch and display the results
+        for row in cursor.fetchall():
+            print(row)
+
+        # Close the cursor and database connection
+        cursor.close()
+        db.close()
+
+    except MySQLdb.Error as e:
+        print("MySQL Error {}: {}".format(e.args[0], e.args[1]))
+        sys.exit(1)
