@@ -1,3 +1,3 @@
 #!/bin/bash
-# Get the byte size of the HTTP response header for a given URL.
-curl -s "$1" | wc -c
+# Get the response body for a given URL for 200 status code responses.
+curl -sL "$1"
